@@ -89,8 +89,6 @@ There are several optional variables that can be set via a `.env` file for certi
 Set details for the certificates that will be generated. If not provided the tak server defaults will be used:
 
 - COUNTRY=
-- STATE=
-- CITY=
 - ORGANIZATIONAL_UNIT=
 
 ### Credentials
@@ -105,8 +103,6 @@ Set a password for the admin user and db user. If not provided, `setup.sh` will 
 ```
 # CERT
 COUNTRY=GB
-STATE=YORKSHIRE
-CITY=YORK
 ORGANIZATIONAL_UNIT=ORG
 
 # CREDS

@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-source ./.env
+[ -f ./.env ] && source ./.env
 
 # Optional: the address clients/browsers will actually use to reach this server
 # (public IP, private IP, or DNS name). TAK Server auto-detects its own Docker

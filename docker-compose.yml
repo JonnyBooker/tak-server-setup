@@ -13,12 +13,11 @@ services:
         aliases:
           - tak-database
     restart: unless-stopped
+    
   tak:
     build:
       context: .
       dockerfile: ./.runtime_do_not_edit/docker/Dockerfile.takserver
-    env_file:
-      - .env
     volumes:
       - "./.runtime_do_not_edit/tak:/opt/tak:z"
       - /etc/localtime:/etc/localtime:ro
