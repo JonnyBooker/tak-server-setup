@@ -11,6 +11,16 @@ Scripts to automate a dockerised TAK Server deployment for local development and
 
 > This repo does not include the TAK Server binaries themselves.
 
+### Tested versions
+
+These scripts are only verified against the releases below. Other releases may work, but the layout of `CoreConfig.xml`, the bundled Dockerfiles, and the `makeCert.sh`/`UserManager` tooling do change between versions, so treat anything untested as unknown.
+
+| Release        | Variation  | Filename                              | Status     | Notes                                                 |
+| -------------- | ---------- | ------------------------------------- | ---------- | ----------------------------------------------------- |
+| 5.7-RELEASE-43 | unhardened | `takserver-docker-5.7-RELEASE-43.zip` | ✅ Verified | Reference version the scripts were developed against. |
+
+Hardened releases are **not** currently supported, they ship different provisioning steps that `setup.sh` doesn't account for.
+
 ## Setup server
 
 ```bash
