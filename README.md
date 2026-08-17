@@ -13,13 +13,46 @@ Scripts to automate a dockerised TAK Server deployment for local development and
 
 ### Tested versions
 
-These scripts are only verified against the releases below. Other releases may work, but the layout of `CoreConfig.xml`, the bundled Dockerfiles, and the `makeCert.sh`/`UserManager` tooling do change between versions, so treat anything untested as unknown.
+These scripts are only verified against the releases below. Other releases may work however there are changes that happen between releases, so treat anything untested as unknown.
 
-| Release        | Variation  | Filename                              | Status     | Notes                                                 |
-| -------------- | ---------- | ------------------------------------- | ---------- | ----------------------------------------------------- |
-| 5.7-RELEASE-43 | unhardened | `takserver-docker-5.7-RELEASE-43.zip` | ✅ Verified | Reference version the scripts were developed against. |
+| Release        | Filename                                       | Status        |
+| -------------- | ---------------------------------------------- | ------------- |
+| 5.7-RELEASE-43 | `takserver-docker-5.7-RELEASE-43.zip`          | ✅ Verified    |
+| 5.7-RELEASE-43 | `takserver-docker-hardened-5.7-RELEASE-43.zip` | ❌ Unsupported |
 
 Hardened releases are **not** currently supported, they ship different provisioning steps that `setup.sh` doesn't account for.
+
+### Unpacking the release
+
+The downloaded `.zip` contains a single top-level folder named after the release, which in turn holds the `docker/` and `tak/` folders:
+
+```
+takserver-docker-5.7-RELEASE-43.zip
+└── takserver-docker-5.7-RELEASE-43/
+    ├── docker/   # Dockerfiles + upstream compose files
+    └── tak/      # the TAK Server files themselves
+```
+
+That wrapper folder needs to be stripped, `.tak-download/` should contain `docker/` and `tak/` **directly**, not a release-named folder in between. `docker-compose.yml` and `setup.sh` reference those paths literally, so an extra level of nesting makes the build fail.
+
+From the repo root, with the `.zip` in `~/Downloads`:
+
+```bash
+# if not already installed
+sudo apt install unzip   
+
+unzip ~/Downloads/takserver-docker-5.7-RELEASE-43.zip -d /tmp/takserver
+mv /tmp/takserver/takserver-docker-5.7-RELEASE-43/* ./.tak-download/
+```
+
+Check it landed correctly, you should see exactly these two folders:
+
+```bash
+ls .tak-download/
+# docker  tak
+```
+
+`.tak-download/` is gitignored and already exists in a fresh clone (it holds a `.gitkeep`), so there's no need to create it.
 
 ## Setup server
 
