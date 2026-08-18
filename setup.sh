@@ -177,6 +177,7 @@ $DOCKER_COMPOSE exec tak bash -c "sed -i 's/password=\"\"/password=\"$MARTI_PASS
 
 # update cert-metadata.sh with configured values
 $DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^COUNTRY=.*/COUNTRY=\"${COUNTRY:-US}\"/' /opt/tak/certs/cert-metadata.sh"
+$DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^ORGANIZATION=.*/ORGANIZATION=\"${ORGANIZATION:-TAK}\"/' /opt/tak/certs/cert-metadata.sh"
 $DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^ORGANIZATIONAL_UNIT=.*/ORGANIZATIONAL_UNIT=\"${ORGANIZATIONAL_UNIT:-TAK}\"/' /opt/tak/certs/cert-metadata.sh"
 $DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^STATE=.*/STATE=\"${STATE:-VA}\"/' /opt/tak/certs/cert-metadata.sh"
 $DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^CITY=.*/CITY=\"${CITY:-Fort Belvoir}\"/' /opt/tak/certs/cert-metadata.sh"
