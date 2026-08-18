@@ -182,7 +182,7 @@ $DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^ORGANIZATIONAL_UNIT=.*/ORGANIZAT
 $DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^STATE=.*/STATE=\"${STATE:-VA}\"/' /opt/tak/certs/cert-metadata.sh"
 $DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^CITY=.*/CITY=\"${CITY:-Fort Belvoir}\"/' /opt/tak/certs/cert-metadata.sh"
 $DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^CAPASS=.*/CAPASS=\"${CAPASS:-atakatak}\"/' /opt/tak/certs/cert-metadata.sh"
-$DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^PASS=.*/PASS=\"${PASS:-\$CAPASS}\"/' /opt/tak/certs/cert-metadata.sh"
+$DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^PASS=.*/PASS=\"${PASS:-atakatak}\"/' /opt/tak/certs/cert-metadata.sh"
 
 # restart the db container so it (re)creates martiuser using the new password from CoreConfig.xml and cert-metadata.sh.
 # The tak container will then pick up the new password on its next restart.
