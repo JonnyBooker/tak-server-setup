@@ -176,12 +176,12 @@ ADMIN_PASSWORD="${ADMIN_USER_PASSWORD:-$(generate_password 15)}"
 $DOCKER_COMPOSE exec tak bash -c "sed -i 's/password=\"\"/password=\"$MARTI_PASSWORD\"/g' /opt/tak/CoreConfig.xml"
 
 # update cert-metadata.sh with configured values
-$DOCKER_COMPOSE exec tak bash -c "sed -i -e 's/COUNTRY=US/COUNTRY=${COUNTRY:-US}/' /opt/tak/certs/cert-metadata.sh"
-$DOCKER_COMPOSE exec tak bash -c "sed -i -e 's/ORGANIZATIONAL_UNIT=/ORGANIZATIONAL_UNIT=${ORGANIZATIONAL_UNIT:-TAK}/' /opt/tak/certs/cert-metadata.sh"
-$DOCKER_COMPOSE exec tak bash -c "sed -i -e 's/STATE=/STATE=${STATE}/' /opt/tak/certs/cert-metadata.sh"
-$DOCKER_COMPOSE exec tak bash -c "sed -i -e 's/CAPASS=/CITY=${CITY}/' /opt/tak/certs/cert-metadata.sh"
-$DOCKER_COMPOSE exec tak bash -c "sed -i -e 's/PASS=/PASS=${PASS:-CAPASS}/' /opt/tak/certs/cert-metadata.sh"
-$DOCKER_COMPOSE exec tak bash -c "sed -i -e 's/CAPASS=/CAPASS=${CAPASS:-atakatak}/' /opt/tak/certs/cert-metadata.sh"
+$DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^COUNTRY=.*/COUNTRY=${COUNTRY:-US}/' /opt/tak/certs/cert-metadata.sh"
+$DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^ORGANIZATIONAL_UNIT=.*/ORGANIZATIONAL_UNIT=${ORGANIZATIONAL_UNIT:-TAK}/' /opt/tak/certs/cert-metadata.sh"
+$DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^STATE=.*/STATE=${STATE:-VA}/' /opt/tak/certs/cert-metadata.sh"
+$DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^CITY=.*/CITY=${CITY:-Fort Belvoir}/' /opt/tak/certs/cert-metadata.sh"
+$DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^CAPASS=.*/CAPASS=${CAPASS:-atakatak}/' /opt/tak/certs/cert-metadata.sh"
+$DOCKER_COMPOSE exec tak bash -c "sed -i -E 's/^PASS=.*/PASS=${PASS:-\$CAPASS}/' /opt/tak/certs/cert-metadata.sh"
 
 # restart the db container so it (re)creates martiuser using the new password from CoreConfig.xml and cert-metadata.sh.
 # The tak container will then pick up the new password on its next restart.
